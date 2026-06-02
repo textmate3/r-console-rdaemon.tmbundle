@@ -27,7 +27,7 @@ end
 PTY.spawn(cmd) { |r,w,pid|
 	# write init stuff to R
 	w.puts(%{source("#{$rdout}/daemon/start.r")})
-	r.sync = FALSE
+	r.sync = false
 
 	# write r to the nirvana
 	Thread.new {
@@ -35,7 +35,7 @@ PTY.spawn(cmd) { |r,w,pid|
 	}
 	
 	fin = File.open($rdout + '/r_in', "r+")
-	while TRUE
+	while true
 		#wait for a new task and send it to R
 		task = fin.gets
 		$fhist.puts task.gsub(/^ +/,'').gsub(/^\t+/,'') if !task.match('^@\|') && !task.empty? && task != "\n"
